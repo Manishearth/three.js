@@ -390,9 +390,9 @@
 
 	var _lut = [];
 
-	for ( var i = 0; i < 256; i ++ ) {
+	for ( var i$1 = 0; i$1 < 256; i$1 ++ ) {
 
-		_lut[ i ] = ( i < 16 ? '0' : '' ) + ( i ).toString( 16 );
+		_lut[ i$1 ] = ( i$1 < 16 ? '0' : '' ) + ( i$1 ).toString( 16 );
 
 	}
 
@@ -22895,6 +22895,33 @@
 
 		};
 
+		this.getHand = function ( id ) {
+
+			var controller = controllers[ id ];
+
+			if ( controller === undefined ) {
+
+				controller = {};
+				controllers[ id ] = controller;
+
+			}
+
+			if ( controller.hand === undefined ) {
+
+				controller.hand = [];
+
+				controller.grip.matrixAutoUpdate = false;
+				controller.grip.visible = false;
+				for (i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+					controller.hand[i] = new Group();
+					controller.hand[i].matrixAutoUpdate = false;
+					controller.hand[i].visible = false;
+				}
+			}
+
+			return controller.hand;
+
+		};
 		//
 
 		function onSessionEvent( event ) {
@@ -23302,6 +23329,20 @@
 
 						}
 
+					}
+
+					if (controller.hand && inputSource.hand) {
+						for (var i$1 = 0; i$1 <= XRHand.LITTLE_PHALANX_TIP; i$1++) {
+							if (inputSource.hand[i$1]) {
+								jointPose = frame.getPose(inputSource.hand[i$1], referenceSpace);
+								if (jointPose !== null) {
+									controller.hand[i$1].matrix.fromArray( gripPose.transform.matrix );
+									controller.hand[i$1].matrix.decompose( controller.hand[i$1].position, controller.hand[i$1].rotation, controller.hand[i$1].scale );
+								}
+
+								controller.hand[i$1].visible = jointPose !== null;
+							}
+						}
 					}
 
 				}
