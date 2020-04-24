@@ -23334,9 +23334,9 @@
 					if (controller.hand && inputSource.hand) {
 						for (var i$1 = 0; i$1 <= XRHand.LITTLE_PHALANX_TIP; i$1++) {
 							if (inputSource.hand[i$1]) {
-								jointPose = frame.getPose(inputSource.hand[i$1], referenceSpace);
+								var jointPose = frame.getPose(inputSource.hand[i$1], referenceSpace);
 								if (jointPose !== null) {
-									controller.hand[i$1].matrix.fromArray( gripPose.transform.matrix );
+									controller.hand[i$1].matrix.fromArray( jointPose.transform.matrix );
 									controller.hand[i$1].matrix.decompose( controller.hand[i$1].position, controller.hand[i$1].rotation, controller.hand[i$1].scale );
 								}
 

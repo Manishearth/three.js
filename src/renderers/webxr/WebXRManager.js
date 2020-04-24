@@ -534,9 +534,9 @@ function WebXRManager( renderer, gl ) {
 				if (controller.hand && inputSource.hand) {
 					for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
 						if (inputSource.hand[i]) {
-							jointPose = frame.getPose(inputSource.hand[i], referenceSpace);
+							let jointPose = frame.getPose(inputSource.hand[i], referenceSpace);
 							if (jointPose !== null) {
-								controller.hand[i].matrix.fromArray( gripPose.transform.matrix );
+								controller.hand[i].matrix.fromArray( jointPose.transform.matrix );
 								controller.hand[i].matrix.decompose( controller.hand[i].position, controller.hand[i].rotation, controller.hand[i].scale );
 							}
 
