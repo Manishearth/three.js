@@ -197,7 +197,7 @@ function WebXRManager( renderer, gl ) {
 
 		framebufferScaleFactor = value;
 
-		// Warn if function is used while presenting
+		// Warn if function is fd while presenting
 		if ( scope.isPresenting == true ) {
 
 			console.warn( "WebXRManager: Cannot change framebuffer scale while presenting VR content" );
@@ -534,13 +534,11 @@ function WebXRManager( renderer, gl ) {
 				if (controller.hand && inputSource.hand) {
 					for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
 						if (inputSource.hand[i]) {
-							let jointPose = frame.getPose(inputSource.hand[i], referenceSpace);
+							let jointPose = frame.getJointPose(inputSource.hand[i], referenceSpace);
 							if (jointPose !== null) {
 								controller.hand[i].matrix.fromArray( jointPose.transform.matrix );
 								controller.hand[i].matrix.decompose( controller.hand[i].position, controller.hand[i].rotation, controller.hand[i].scale );
-								controller.hand[i].scale.x = jointPose.radius;
-								controller.hand[i].scale.y = jointPose.radius;
-								controller.hand[i].scale.z = jointPose.radius;
+								controller.hand[i].jointRadius = jointPose.radius;
 							}
 
 							controller.hand[i].visible = jointPose !== null;
