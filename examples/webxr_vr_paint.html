@@ -158,11 +158,13 @@
 				let hand1 = renderer.xr.getHand(0);
 				let hand2 = renderer.xr.getHand(1);
 
-				var geometry = new THREE.IcosahedronBufferGeometry( 0.02, 2 );
-				var material = new THREE.MeshStandardMaterial( { flatShading: true } );
-				var mesh = new THREE.Mesh( geometry, material );
+				var geometry = new THREE.IcosahedronBufferGeometry( 0.005, 2 );
+
 
 				for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+					let c = 255 * i / XRHand.LITTLE_PHALANX_TIP;
+					var material = new THREE.MeshStandardMaterial( { color:  c * 0x10000 + ((c + 70) % 255) * 0x100 + ((c + 140) % 255),flatShading: true } );
+					var mesh = new THREE.Mesh( geometry, material );
 					hand1[i].add(mesh.clone());
 					scene.add(hand1[i]);
 					hand2[i].add(mesh.clone());
