@@ -95,6 +95,33 @@ function WebXRManager( renderer, gl ) {
 
 	};
 
+	this.getHand = function ( id ) {
+
+		var controller = controllers[ id ];
+
+		if ( controller === undefined ) {
+
+			controller = {};
+			controllers[ id ] = controller;
+
+		}
+
+		if ( controller.hand === undefined ) {
+
+			controller.hand = [];
+
+			controller.grip.matrixAutoUpdate = false;
+			controller.grip.visible = false;
+			for (i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+				controller.hand[i] = new Group();
+				controller.hand[i].matrixAutoUpdate = false;
+				controller.hand[i].visible = false;
+			}
+		}
+
+		return controller.hand;
+
+	};
 	//
 
 	function onSessionEvent( event ) {
@@ -502,6 +529,20 @@ function WebXRManager( renderer, gl ) {
 
 					}
 
+				}
+
+				if (controller.hand && inputSource.hand) {
+					for (i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+						if (inputSource.hand[i]) {
+							jointPose = frame.getPose(inputSource.hand[i], referenceSpace);
+							if (jointPose !== null) {
+								controller.hand[i].matrix.fromArray( gripPose.transform.matrix );
+								controller.hand[i].matrix.decompose( controller.hand[i].position, controller.hand[i].rotation, controller.hand[i].scale );
+							}
+
+							controller.hand[i].visible = jointPose !== null;
+						}
+					}
 				}
 
 			}
