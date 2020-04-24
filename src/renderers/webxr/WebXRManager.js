@@ -532,7 +532,7 @@ function WebXRManager( renderer, gl ) {
 				}
 
 				if (controller.hand && inputSource.hand) {
-					for (i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+					for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
 						if (inputSource.hand[i]) {
 							jointPose = frame.getPose(inputSource.hand[i], referenceSpace);
 							if (jointPose !== null) {

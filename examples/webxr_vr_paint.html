@@ -153,8 +153,19 @@
 				pivot.position.z = - 0.05;
 				mesh.add( pivot );
 
-				controller1.add( mesh.clone() );
-				controller2.add( mesh.clone() );
+				// controller1.add( mesh.clone() );
+				// controller2.add( mesh.clone() );
+				let hand1 = renderer.xr.getHand(0);
+				let hand2 = renderer.xr.getHand(1);
+
+				var geometry = new THREE.IcosahedronBufferGeometry( 0.02, 2 );
+				var material = new THREE.MeshStandardMaterial( { flatShading: true } );
+				var mesh = new THREE.Mesh( geometry, material );
+
+				for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+					hand1[i].add(mesh.clone());
+					hand2[i].add(mesh.clone());
+				}
 
 				//
 
