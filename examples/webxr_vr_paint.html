@@ -56,7 +56,7 @@
 				var table = new THREE.Mesh( geometry, material );
 				table.position.y = 0.35;
 				table.position.z = 0.85;
-				scene.add( table );
+				// scene.add( table );
 
 				var geometry = new THREE.PlaneBufferGeometry( 4, 4 );
 				var material = new THREE.MeshStandardMaterial( {
@@ -158,7 +158,7 @@
 				let hand1 = renderer.xr.getHand(0);
 				let hand2 = renderer.xr.getHand(1);
 
-				var geometry = new THREE.IcosahedronBufferGeometry( 0.005, 2 );
+				var geometry = new THREE.IcosahedronBufferGeometry( 1, 2 );
 
 
 				for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
