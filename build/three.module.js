@@ -384,9 +384,9 @@ Object.assign( EventDispatcher.prototype, {
 
 var _lut = [];
 
-for ( var i$1 = 0; i$1 < 256; i$1 ++ ) {
+for ( var i = 0; i < 256; i ++ ) {
 
-	_lut[ i$1 ] = ( i$1 < 16 ? '0' : '' ) + ( i$1 ).toString( 16 );
+	_lut[ i ] = ( i < 16 ? '0' : '' ) + ( i ).toString( 16 );
 
 }
 
@@ -22902,9 +22902,9 @@ function WebXRManager( renderer, gl ) {
 
 			controller.hand = [];
 
-			controller.grip.matrixAutoUpdate = false;
-			controller.grip.visible = false;
-			for (i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+			controller.hand.matrixAutoUpdate = false;
+			controller.hand.visible = false;
+			for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
 				controller.hand[i] = new Group();
 				controller.hand[i].matrixAutoUpdate = false;
 				controller.hand[i].visible = false;

@@ -110,9 +110,9 @@ function WebXRManager( renderer, gl ) {
 
 			controller.hand = [];
 
-			controller.grip.matrixAutoUpdate = false;
-			controller.grip.visible = false;
-			for (i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
+			controller.hand.matrixAutoUpdate = false;
+			controller.hand.visible = false;
+			for (let i = 0; i <= XRHand.LITTLE_PHALANX_TIP; i++) {
 				controller.hand[i] = new Group();
 				controller.hand[i].matrixAutoUpdate = false;
 				controller.hand[i].visible = false;
