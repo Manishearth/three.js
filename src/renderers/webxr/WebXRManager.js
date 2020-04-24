@@ -538,6 +538,9 @@ function WebXRManager( renderer, gl ) {
 							if (jointPose !== null) {
 								controller.hand[i].matrix.fromArray( jointPose.transform.matrix );
 								controller.hand[i].matrix.decompose( controller.hand[i].position, controller.hand[i].rotation, controller.hand[i].scale );
+								controller.hand[i].scale.x = jointPose.radius;
+								controller.hand[i].scale.y = jointPose.radius;
+								controller.hand[i].scale.z = jointPose.radius;
 							}
 
 							controller.hand[i].visible = jointPose !== null;

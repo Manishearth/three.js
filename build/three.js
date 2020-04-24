@@ -23338,6 +23338,9 @@
 								if (jointPose !== null) {
 									controller.hand[i$1].matrix.fromArray( jointPose.transform.matrix );
 									controller.hand[i$1].matrix.decompose( controller.hand[i$1].position, controller.hand[i$1].rotation, controller.hand[i$1].scale );
+									controller.hand[i$1].scale.x = jointPose.radius;
+									controller.hand[i$1].scale.y = jointPose.radius;
+									controller.hand[i$1].scale.z = jointPose.radius;
 								}
 
 								controller.hand[i$1].visible = jointPose !== null;
