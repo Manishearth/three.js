@@ -22836,9 +22836,15 @@
 		cameraR.layers.enable( 2 );
 		cameraR.viewport = new Vector4();
 
-		var cameraVR = new ArrayCamera( [ cameraL, cameraR ] );
+
+		var camera3 = new PerspectiveCamera();
+		camera3.layers.enable( 3 );
+		camera3.viewport = new Vector4();
+
+		var cameraVR = new ArrayCamera( [ cameraL, cameraR , camera3] );
 		cameraVR.layers.enable( 1 );
 		cameraVR.layers.enable( 2 );
+		cameraVR.layers.enable( 3 );
 
 		var _currentDepthNear = null;
 		var _currentDepthFar = null;
